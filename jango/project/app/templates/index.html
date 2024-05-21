@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home-page</title>
+    <style>
+        a {
+            text-decoration: none;
+            font-size: 20px;
+        }
+        a:hover {
+            border-bottom: solid 4px;
+            border-radius: 3px;
+            color: black;
+            width: 10px;
+        }
+    </style>
+    {% load static %}
+</head>
+<body>
+    {% block content %}
+    <h1>Hi, this is Dhanush</h1>
+    <a href="{% url 'signup' %}">Signup</a>
+   
+    {% endblock %}
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
