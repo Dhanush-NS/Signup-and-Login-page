@@ -1,3 +1,4 @@
+//******************************* signup validation form  ***********************************
 
         function validateForm() {
             var name = document.getElementById("name").value;
@@ -23,3 +24,16 @@
             }
             return true;
         }
+
+// *********************************** END *****************************************
+
+// **********************************login form validation***************************
+
+function loginform() {
+    var email = document.getElementById('email').value;
+    if (!email.includes('@gmail.com') ) {
+        alert('Enter valid email address...')
+        return false;
+    }
+    return true;
+}

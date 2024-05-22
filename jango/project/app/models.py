@@ -11,4 +11,10 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Login(models.Model):
+    email = models.EmailField(default='')
+    password = models.CharField(max_length=40)
 
+    def __str__(self):
+        return self.email

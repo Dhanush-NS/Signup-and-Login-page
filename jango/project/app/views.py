@@ -1,6 +1,6 @@
-from django.shortcuts import render,HttpResponse
-from .models import Student
-
+from django.shortcuts import render, HttpResponse, redirect
+from .models import Student ,Login
+from django.contrib import messages
 def index(request):
     return render(request, 'index.html')
 
@@ -28,7 +28,28 @@ def signup(request):
         student = Student(name=name, phone=phone, email=email, password1=password1, password2=password2)
         student.save()
 
-        return HttpResponse('Form submitted successfully.')
+        return HttpResponse('Sign up successfull.')
     return render(request, 'signup.html')
 
+def login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        try:
+            student = Student.objects.get(email=email)
+        except Student.DoesNotExist:
+            messages.error(request, 'Please signup first...')
+            return redirect('index')
 
+        if student.password1 != password:
+            messages.error(request, 'Password not matched')
+            return redirect('index')
+        applogin =  Login(email = email, password = password)
+        applogin.save()
+
+        messages.success(request, 'Login successful')
+        
+
+        return redirect('index')  # or wherever you want to redirect upon successful login
+    return render(request, 'login.html')
