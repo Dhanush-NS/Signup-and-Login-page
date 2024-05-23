@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css'%}">
+
 </head>
 <body>
     
+
+    {% block content %}
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <label for="email">E-MAIL:</label>
@@ -17,5 +22,8 @@
         <br><br>
         <button type="submit">Login</button>
     </form>
+    {%endblock%}
+    <script src="{% static 'js/script.js' %}"></script>
+
 </body>
 </html>

@@ -13,19 +13,20 @@
             border-bottom: solid 4px;
             border-radius: 3px;
             color: black;
-            width: 10px;
         }
     </style>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
 <body>
-    
     {% block content %}
-    <h1>Hi, this is Dhanush</h1>
-    <a href="{% url 'signup' %}">Signup</a>
-    <a href="{% url 'login' %}">Login</a>
-    
+    <div id="index">
+        <h1>Welcome</h1>
+        <a id="signup" href="{% url 'signup' %}">Signup</a>
+        <a id="login" href="{% url 'login' %}">Login</a>
+    </div>
     {% endblock %}
+    
     {% if messages %}
         <ul>
             {% for message in messages %}
@@ -33,6 +34,7 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <script src="{% static 'script.js' %}"></script>
+    
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

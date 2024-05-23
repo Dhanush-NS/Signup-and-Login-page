@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import Student ,Login
+from .models import Student, Login
 from django.contrib import messages
 def index(request):
     return render(request, 'index.html')
@@ -24,6 +24,11 @@ def signup(request):
 
         if password1 != password2:
             return HttpResponse('Passwords do not match.')
+        
+        if Student.objects.filter(email=email).exists():
+            messages.error(request,'email is registered already, pls login..')
+            return redirect('index')
+
 
         student = Student(name=name, phone=phone, email=email, password1=password1, password2=password2)
         student.save()
@@ -39,9 +44,13 @@ def login(request):
         try:
             student = Student.objects.get(email=email)
         except Student.DoesNotExist:
-            messages.error(request, 'Please signup first...')
+            messages.error(request, 'Not yet signup,Please signup first...')
             return redirect('index')
-
+        except Student.MultipleObjectsReturned:
+            # Handle the case where multiple students with the same email exist
+            students = Student.objects.filter(email=email)
+            student = students.first()
+            
         if student.password1 != password:
             messages.error(request, 'Password not matched')
             return redirect('index')
