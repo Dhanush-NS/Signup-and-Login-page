@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home-page</title>
+    <style>
+       
+    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    {% block content %}
+    <div id="index">
+        <h1>Welcome</h1>
+        <div id="log">
+        <a id="signup" href="{% url 'signup' %}">Signup</a>
+        <a id="login" href="{% url 'login' %}">Login</a>
+    </div>
+    </div>
+    {% endblock %}
+    <div id="message">
+    
+    <p>{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</p>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
